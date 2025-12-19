@@ -1,4 +1,4 @@
-﻿namespace Tyuiu.KosyakovDS.Sprint6.Task7.V20
+﻿namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 {
     partial class FormAbout
     {
@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             pictureBoxAvatar_KDS = new PictureBox();
-            textBox1 = new TextBox();
+            textBoxAbout_KDS = new TextBox();
             buttonOk_KDS = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAvatar_KDS).BeginInit();
             SuspendLayout();
@@ -46,18 +46,17 @@
             pictureBoxAvatar_KDS.TabIndex = 0;
             pictureBoxAvatar_KDS.TabStop = false;
             // 
-            // textBox1
+            // textBoxAbout_KDS
             // 
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(208, 14);
-            textBox1.Margin = new Padding(2);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(346, 152);
-            textBox1.TabIndex = 1;
-            textBox1.Text = resources.GetString("textBox1.Text");
-            textBox1.TextChanged += textBox1_TextChanged;
+            textBoxAbout_KDS.BorderStyle = BorderStyle.None;
+            textBoxAbout_KDS.Location = new Point(208, 14);
+            textBoxAbout_KDS.Margin = new Padding(2);
+            textBoxAbout_KDS.Multiline = true;
+            textBoxAbout_KDS.Name = "textBoxAbout_KDS";
+            textBoxAbout_KDS.ReadOnly = true;
+            textBoxAbout_KDS.Size = new Size(346, 152);
+            textBoxAbout_KDS.TabIndex = 1;
+            textBoxAbout_KDS.Text = resources.GetString("textBoxAbout_KDS.Text");
             // 
             // buttonOk_KDS
             // 
@@ -77,7 +76,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(563, 213);
             Controls.Add(buttonOk_KDS);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxAbout_KDS);
             Controls.Add(pictureBoxAvatar_KDS);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(2);
@@ -93,7 +92,7 @@
         #endregion
 
         private PictureBox pictureBoxAvatar_KDS;
-        private TextBox textBox1;
+        private TextBox textBoxAbout_KDS;
         private Button buttonOk_KDS;
     }
 }
