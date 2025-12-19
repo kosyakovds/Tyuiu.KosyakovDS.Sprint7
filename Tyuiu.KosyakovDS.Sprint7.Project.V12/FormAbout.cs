@@ -8,13 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
+namespace Tyuiu.KosyakovDS.Sprint6.Task7.V20
 {
     public partial class FormAbout : Form
     {
         public FormAbout()
         {
             InitializeComponent();
+        }
+
+        private void buttonOk_KDS_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
