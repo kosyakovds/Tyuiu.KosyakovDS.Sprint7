@@ -10,7 +10,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             InitializeComponent();
         }
 
-        private void FormAboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuItemAbout_KDS_Click(object sender, EventArgs e)
         {
             FormAbout formAbout = new FormAbout();
             formAbout.ShowDialog();
