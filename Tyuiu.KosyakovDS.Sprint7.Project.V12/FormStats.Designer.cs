@@ -59,7 +59,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 161);
+            ClientSize = new Size(384, 261);
             Controls.Add(groupBoxStats_KDS);
             Controls.Add(buttonClose_KDS);
             FormBorderStyle = FormBorderStyle.FixedSingle;

@@ -23,6 +23,32 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
     public class DataService
     {
+        public double CalculateSum(List<PersonalComputer> pcs, string columnName)
+        {
+            double sum = 0;
+
+            foreach (var pc in pcs)
+            {
+                string valueToParse = "";
+
+                if (columnName == "ОЗУ")
+                {
+                    valueToParse = pc.RAM;
+                }
+                else if (columnName == "Жёсткий диск")
+                {
+                    valueToParse = pc.HDD;
+                }
+
+                if (double.TryParse(valueToParse, out double val))
+                {
+                    sum += val;
+                }
+            }
+
+            return sum;
+        }
+    
         public string GetStatistics(List<PersonalComputer> pcs, List<Supplier> suppliers)
         {
             string stats = Environment.NewLine;

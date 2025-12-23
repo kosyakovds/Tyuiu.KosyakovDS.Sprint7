@@ -31,16 +31,24 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewPCs_KDS.Columns.Add("Manufacturer", "Производитель");
             dataGridViewPCs_KDS.Columns.Add("CPU", "Процессор");
             dataGridViewPCs_KDS.Columns.Add("GPU", "Видеокарта");
-            dataGridViewPCs_KDS.Columns.Add("RAM", "ОЗУ");
-            dataGridViewPCs_KDS.Columns.Add("HDD", "Жесткий диск");
-            dataGridViewPCs_KDS.Columns.Add("ReleaseDate", "Дата выпуска");
 
+            int ramCol = dataGridViewPCs_KDS.Columns.Add("RAM", "ОЗУ");
+            dataGridViewPCs_KDS.Columns[ramCol].ValueType = typeof(int);
+
+            int hddCol = dataGridViewPCs_KDS.Columns.Add("HDD", "Жёсткий диск");
+            dataGridViewPCs_KDS.Columns[hddCol].ValueType = typeof(int);
+
+            int dateCol = dataGridViewPCs_KDS.Columns.Add("ReleaseDate", "Дата выпуска");
+            dataGridViewPCs_KDS.Columns[dateCol].ValueType = typeof(DateTime);
+            dataGridViewPCs_KDS.Columns[dateCol].DefaultCellStyle.Format = "d";
 
             dataGridViewSuppliers_KDS.Columns.Add("Name", "Наименование");
             dataGridViewSuppliers_KDS.Columns.Add("Address", "Адрес");
             dataGridViewSuppliers_KDS.Columns.Add("Phone", "Телефон");
             dataGridViewSuppliers_KDS.Columns.Add("Note", "Примечание");
         }
+
+        private List<PersonalComputer> pcList_KDS = new List<PersonalComputer>();
 
         private void ToolStripMenuItemOpen_KDS_Click(object sender, EventArgs e)
         {
@@ -71,6 +79,8 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             }
 
             dataGridViewPCs_KDS.Rows.Clear();
+            pcList_KDS.Clear();
+
             string[] lines = File.ReadAllLines(fileName, Encoding.GetEncoding(1251));
 
             for (int i = 1; i < lines.Length; i++)
@@ -78,7 +88,21 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
                 string[] parts = lines[i].Split(';');
                 if (parts.Length >= 6)
                 {
-                    dataGridViewPCs_KDS.Rows.Add(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]);
+                    int ram = int.TryParse(parts[3], out int r) ? r : 0;
+                    int hdd = int.TryParse(parts[4], out int h) ? h : 0;
+                    DateTime date = DateTime.TryParse(parts[5], out DateTime d) ? d : DateTime.MinValue;
+
+                    dataGridViewPCs_KDS.Rows.Add(parts[0], parts[1], parts[2], ram, hdd, date);
+
+                    pcList_KDS.Add(new PersonalComputer
+                    {
+                        Manufacturer = parts[0],
+                        Processor = parts[1],
+                        Frequency = parts[2],
+                        RAM = parts[3],
+                        HDD = parts[4],
+                        ReleaseDate = parts[5]
+                    });
                 }
             }
         }
@@ -194,6 +218,44 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
             FormStats formStats = new FormStats(stats);
             formStats.ShowDialog();
+        }
+
+        private void buttonStatsSum_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.EndEdit();
+
+            if (dataGridViewPCs_KDS.CurrentCell != null)
+            {
+                int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+                string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
+
+                double sum = 0;
+                string rowsText = "";
+
+                foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
+                {
+                    if (cell.ColumnIndex == targetColIndex)
+                    {
+                        if (cell.RowIndex != -1 && cell.RowIndex < pcList_KDS.Count)
+                        {
+                            string valueToParse = "";
+
+                            if (columnName == "ОЗУ") valueToParse = pcList_KDS[cell.RowIndex].RAM;
+                            else if (columnName == "Жёсткий диск") valueToParse = pcList_KDS[cell.RowIndex].HDD;
+
+                            if (double.TryParse(valueToParse.Replace(".", ","), out double val))
+                            {
+                                sum += val;
+                            }
+
+                            if (rowsText != "") rowsText += ", ";
+                            rowsText += (cell.RowIndex + 1).ToString();
+                        }
+                    }
+                }
+
+                labelStatsResult_KDS.Text = $"Итого: Сумма по столбцу [{columnName}] и строкам [{rowsText}]: {sum}";
+            }
         }
     }
 }

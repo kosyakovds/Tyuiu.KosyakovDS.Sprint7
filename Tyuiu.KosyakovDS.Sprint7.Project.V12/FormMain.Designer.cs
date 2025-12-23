@@ -47,9 +47,13 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             toolStripMenuItemManual_KDS = new ToolStripMenuItem();
             toolStripMenuItemAbout_KDS = new ToolStripMenuItem();
             panelTop_KDS = new Panel();
-            groupBoxService_KDS = new GroupBox();
             buttonChart_KDS = new Button();
-            buttonStatistics_KDS = new Button();
+            groupBoxStats_KDS = new GroupBox();
+            buttonStatsSum = new Button();
+            buttonStatsCount = new Button();
+            buttonStatsAvg_KDS = new Button();
+            buttonStatsMin_KDS = new Button();
+            buttonStatsMax_KDS = new Button();
             groupBoxSearchFilter_KDS = new GroupBox();
             buttonClearFilter_KDS = new Button();
             buttonApplyFilter_KDS = new Button();
@@ -63,9 +67,10 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewPCs_KDS = new DataGridView();
             tabPageSuppliers_KDS = new TabPage();
             dataGridViewSuppliers_KDS = new DataGridView();
+            labelStatsResult_KDS = new Label();
             menuStripMain_KDS.SuspendLayout();
             panelTop_KDS.SuspendLayout();
-            groupBoxService_KDS.SuspendLayout();
+            groupBoxStats_KDS.SuspendLayout();
             groupBoxSearchFilter_KDS.SuspendLayout();
             panelFill_KDS.SuspendLayout();
             tabControlMain_KDS.SuspendLayout();
@@ -158,7 +163,9 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             // panelTop_KDS
             // 
-            panelTop_KDS.Controls.Add(groupBoxService_KDS);
+            panelTop_KDS.Controls.Add(labelStatsResult_KDS);
+            panelTop_KDS.Controls.Add(buttonChart_KDS);
+            panelTop_KDS.Controls.Add(groupBoxStats_KDS);
             panelTop_KDS.Controls.Add(groupBoxSearchFilter_KDS);
             panelTop_KDS.Dock = DockStyle.Top;
             panelTop_KDS.Location = new Point(0, 24);
@@ -166,36 +173,75 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             panelTop_KDS.Size = new Size(984, 130);
             panelTop_KDS.TabIndex = 1;
             // 
-            // groupBoxService_KDS
-            // 
-            groupBoxService_KDS.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            groupBoxService_KDS.Controls.Add(buttonChart_KDS);
-            groupBoxService_KDS.Controls.Add(buttonStatistics_KDS);
-            groupBoxService_KDS.Location = new Point(600, 10);
-            groupBoxService_KDS.Name = "groupBoxService_KDS";
-            groupBoxService_KDS.Size = new Size(250, 90);
-            groupBoxService_KDS.TabIndex = 1;
-            groupBoxService_KDS.TabStop = false;
-            groupBoxService_KDS.Text = "Сервис";
-            // 
             // buttonChart_KDS
             // 
-            buttonChart_KDS.Location = new Point(120, 30);
+            buttonChart_KDS.Location = new Point(872, 15);
             buttonChart_KDS.Name = "buttonChart_KDS";
             buttonChart_KDS.Size = new Size(100, 35);
             buttonChart_KDS.TabIndex = 1;
             buttonChart_KDS.Text = "График";
             buttonChart_KDS.UseVisualStyleBackColor = true;
             // 
-            // buttonStatistics_KDS
+            // groupBoxStats_KDS
             // 
-            buttonStatistics_KDS.Location = new Point(10, 30);
-            buttonStatistics_KDS.Name = "buttonStatistics_KDS";
-            buttonStatistics_KDS.Size = new Size(100, 35);
-            buttonStatistics_KDS.TabIndex = 0;
-            buttonStatistics_KDS.Text = "Статистика";
-            buttonStatistics_KDS.UseVisualStyleBackColor = true;
-            buttonStatistics_KDS.Click += buttonStatistics_KDS_Click;
+            groupBoxStats_KDS.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            groupBoxStats_KDS.Controls.Add(buttonStatsSum);
+            groupBoxStats_KDS.Controls.Add(buttonStatsCount);
+            groupBoxStats_KDS.Controls.Add(buttonStatsAvg_KDS);
+            groupBoxStats_KDS.Controls.Add(buttonStatsMin_KDS);
+            groupBoxStats_KDS.Controls.Add(buttonStatsMax_KDS);
+            groupBoxStats_KDS.Location = new Point(518, 10);
+            groupBoxStats_KDS.Name = "groupBoxStats_KDS";
+            groupBoxStats_KDS.Size = new Size(250, 90);
+            groupBoxStats_KDS.TabIndex = 1;
+            groupBoxStats_KDS.TabStop = false;
+            groupBoxStats_KDS.Text = "Статистика";
+            // 
+            // buttonStatsSum
+            // 
+            buttonStatsSum.Location = new Point(168, 22);
+            buttonStatsSum.Name = "buttonStatsSum";
+            buttonStatsSum.Size = new Size(75, 23);
+            buttonStatsSum.TabIndex = 0;
+            buttonStatsSum.Text = "Сумма";
+            buttonStatsSum.UseVisualStyleBackColor = true;
+            buttonStatsSum.Click += buttonStatsSum_Click;
+            // 
+            // buttonStatsCount
+            // 
+            buttonStatsCount.Location = new Point(129, 51);
+            buttonStatsCount.Name = "buttonStatsCount";
+            buttonStatsCount.Size = new Size(83, 23);
+            buttonStatsCount.TabIndex = 0;
+            buttonStatsCount.Text = "Количество";
+            buttonStatsCount.UseVisualStyleBackColor = true;
+            // 
+            // buttonStatsAvg_KDS
+            // 
+            buttonStatsAvg_KDS.Location = new Point(87, 22);
+            buttonStatsAvg_KDS.Name = "buttonStatsAvg_KDS";
+            buttonStatsAvg_KDS.Size = new Size(75, 23);
+            buttonStatsAvg_KDS.TabIndex = 0;
+            buttonStatsAvg_KDS.Text = "Среднее";
+            buttonStatsAvg_KDS.UseVisualStyleBackColor = true;
+            // 
+            // buttonStatsMin_KDS
+            // 
+            buttonStatsMin_KDS.Location = new Point(6, 50);
+            buttonStatsMin_KDS.Name = "buttonStatsMin_KDS";
+            buttonStatsMin_KDS.Size = new Size(75, 23);
+            buttonStatsMin_KDS.TabIndex = 0;
+            buttonStatsMin_KDS.Text = "Мин";
+            buttonStatsMin_KDS.UseVisualStyleBackColor = true;
+            // 
+            // buttonStatsMax_KDS
+            // 
+            buttonStatsMax_KDS.Location = new Point(6, 21);
+            buttonStatsMax_KDS.Name = "buttonStatsMax_KDS";
+            buttonStatsMax_KDS.Size = new Size(75, 23);
+            buttonStatsMax_KDS.TabIndex = 0;
+            buttonStatsMax_KDS.Text = "Макс";
+            buttonStatsMax_KDS.UseVisualStyleBackColor = true;
             // 
             // groupBoxSearchFilter_KDS
             // 
@@ -334,6 +380,16 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewSuppliers_KDS.Size = new Size(970, 473);
             dataGridViewSuppliers_KDS.TabIndex = 0;
             // 
+            // labelStatsResult_KDS
+            // 
+            labelStatsResult_KDS.AutoSize = true;
+            labelStatsResult_KDS.Location = new Point(524, 103);
+            labelStatsResult_KDS.Name = "labelStatsResult_KDS";
+            labelStatsResult_KDS.RightToLeft = RightToLeft.No;
+            labelStatsResult_KDS.Size = new Size(43, 15);
+            labelStatsResult_KDS.TabIndex = 2;
+            labelStatsResult_KDS.Text = "Итого:";
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -348,7 +404,8 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             menuStripMain_KDS.ResumeLayout(false);
             menuStripMain_KDS.PerformLayout();
             panelTop_KDS.ResumeLayout(false);
-            groupBoxService_KDS.ResumeLayout(false);
+            panelTop_KDS.PerformLayout();
+            groupBoxStats_KDS.ResumeLayout(false);
             groupBoxSearchFilter_KDS.ResumeLayout(false);
             groupBoxSearchFilter_KDS.PerformLayout();
             panelFill_KDS.ResumeLayout(false);
@@ -377,8 +434,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemManual_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout_KDS;
         private System.Windows.Forms.Panel panelTop_KDS;
-        private System.Windows.Forms.GroupBox groupBoxService_KDS;
-        private System.Windows.Forms.Button buttonStatistics_KDS;
+        private System.Windows.Forms.GroupBox groupBoxStats_KDS;
         private System.Windows.Forms.Button buttonChart_KDS;
         private System.Windows.Forms.GroupBox groupBoxSearchFilter_KDS;
         private System.Windows.Forms.Button buttonApplyFilter_KDS;
@@ -393,5 +449,11 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
         private System.Windows.Forms.TabPage tabPageSuppliers_KDS;
         private System.Windows.Forms.DataGridView dataGridViewPCs_KDS;
         private System.Windows.Forms.DataGridView dataGridViewSuppliers_KDS;
+        private Button buttonStatsSum;
+        private Button buttonStatsCount;
+        private Button buttonStatsAvg_KDS;
+        private Button buttonStatsMin_KDS;
+        private Button buttonStatsMax_KDS;
+        private Label labelStatsResult_KDS;
     }
 }
