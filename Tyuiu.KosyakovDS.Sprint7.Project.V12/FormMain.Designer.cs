@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 {
@@ -33,14 +36,12 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
         {
             menuStripMain_KDS = new MenuStrip();
             toolStripMenuItemFile_KDS = new ToolStripMenuItem();
-            toolStripMenuItemNew_KDS = new ToolStripMenuItem();
             toolStripMenuItemOpen_KDS = new ToolStripMenuItem();
             toolStripMenuItemSave_KDS = new ToolStripMenuItem();
             toolStripMenuItemSaveAs_KDS = new ToolStripMenuItem();
             toolStripSeparatorFileMenu_KDS = new ToolStripSeparator();
             toolStripMenuItemEdit_KDS = new ToolStripMenuItem();
             toolStripMenuItemAddPC_KDS = new ToolStripMenuItem();
-            toolStripMenuItemEditPC_KDS = new ToolStripMenuItem();
             toolStripMenuItemDeletePC_KDS = new ToolStripMenuItem();
             toolStripMenuItemHelp_KDS = new ToolStripMenuItem();
             toolStripMenuItemManual_KDS = new ToolStripMenuItem();
@@ -85,34 +86,31 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             // toolStripMenuItemFile_KDS
             // 
-            toolStripMenuItemFile_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemNew_KDS, toolStripMenuItemOpen_KDS, toolStripMenuItemSave_KDS, toolStripMenuItemSaveAs_KDS, toolStripSeparatorFileMenu_KDS });
+            toolStripMenuItemFile_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemOpen_KDS, toolStripMenuItemSave_KDS, toolStripMenuItemSaveAs_KDS, toolStripSeparatorFileMenu_KDS });
             toolStripMenuItemFile_KDS.Name = "toolStripMenuItemFile_KDS";
             toolStripMenuItemFile_KDS.Size = new Size(48, 20);
             toolStripMenuItemFile_KDS.Text = "Файл";
-            // 
-            // toolStripMenuItemNew_KDS
-            // 
-            toolStripMenuItemNew_KDS.Name = "toolStripMenuItemNew_KDS";
-            toolStripMenuItemNew_KDS.Size = new Size(163, 22);
-            toolStripMenuItemNew_KDS.Text = "Создать";
             // 
             // toolStripMenuItemOpen_KDS
             // 
             toolStripMenuItemOpen_KDS.Name = "toolStripMenuItemOpen_KDS";
             toolStripMenuItemOpen_KDS.Size = new Size(163, 22);
             toolStripMenuItemOpen_KDS.Text = "Открыть";
+            toolStripMenuItemOpen_KDS.Click += ToolStripMenuItemOpen_KDS_Click;
             // 
             // toolStripMenuItemSave_KDS
             // 
             toolStripMenuItemSave_KDS.Name = "toolStripMenuItemSave_KDS";
             toolStripMenuItemSave_KDS.Size = new Size(163, 22);
             toolStripMenuItemSave_KDS.Text = "Сохранить";
+            toolStripMenuItemSave_KDS.Click += ToolStripMenuItemSave_KDS_Click;
             // 
             // toolStripMenuItemSaveAs_KDS
             // 
             toolStripMenuItemSaveAs_KDS.Name = "toolStripMenuItemSaveAs_KDS";
             toolStripMenuItemSaveAs_KDS.Size = new Size(163, 22);
             toolStripMenuItemSaveAs_KDS.Text = "Сохранить как...";
+            toolStripMenuItemSaveAs_KDS.Click += ToolStripMenuItemSaveAs_KDS_Click;
             // 
             // toolStripSeparatorFileMenu_KDS
             // 
@@ -121,7 +119,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             // toolStripMenuItemEdit_KDS
             // 
-            toolStripMenuItemEdit_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemAddPC_KDS, toolStripMenuItemEditPC_KDS, toolStripMenuItemDeletePC_KDS });
+            toolStripMenuItemEdit_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemAddPC_KDS, toolStripMenuItemDeletePC_KDS });
             toolStripMenuItemEdit_KDS.Name = "toolStripMenuItemEdit_KDS";
             toolStripMenuItemEdit_KDS.Size = new Size(99, 20);
             toolStripMenuItemEdit_KDS.Text = "Редактировать";
@@ -129,19 +127,13 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // toolStripMenuItemAddPC_KDS
             // 
             toolStripMenuItemAddPC_KDS.Name = "toolStripMenuItemAddPC_KDS";
-            toolStripMenuItemAddPC_KDS.Size = new Size(173, 22);
+            toolStripMenuItemAddPC_KDS.Size = new Size(145, 22);
             toolStripMenuItemAddPC_KDS.Text = "Добавить ПК";
-            // 
-            // toolStripMenuItemEditPC_KDS
-            // 
-            toolStripMenuItemEditPC_KDS.Name = "toolStripMenuItemEditPC_KDS";
-            toolStripMenuItemEditPC_KDS.Size = new Size(173, 22);
-            toolStripMenuItemEditPC_KDS.Text = "Редактировать ПК";
             // 
             // toolStripMenuItemDeletePC_KDS
             // 
             toolStripMenuItemDeletePC_KDS.Name = "toolStripMenuItemDeletePC_KDS";
-            toolStripMenuItemDeletePC_KDS.Size = new Size(173, 22);
+            toolStripMenuItemDeletePC_KDS.Size = new Size(145, 22);
             toolStripMenuItemDeletePC_KDS.Text = "Удалить ПК";
             // 
             // toolStripMenuItemHelp_KDS
@@ -154,13 +146,13 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // toolStripMenuItemManual_KDS
             // 
             toolStripMenuItemManual_KDS.Name = "toolStripMenuItemManual_KDS";
-            toolStripMenuItemManual_KDS.Size = new Size(180, 22);
+            toolStripMenuItemManual_KDS.Size = new Size(149, 22);
             toolStripMenuItemManual_KDS.Text = "Руководство";
             // 
             // toolStripMenuItemAbout_KDS
             // 
             toolStripMenuItemAbout_KDS.Name = "toolStripMenuItemAbout_KDS";
-            toolStripMenuItemAbout_KDS.Size = new Size(180, 22);
+            toolStripMenuItemAbout_KDS.Size = new Size(149, 22);
             toolStripMenuItemAbout_KDS.Text = "О программе";
             toolStripMenuItemAbout_KDS.Click += toolStripMenuItemAbout_KDS_Click;
             // 
@@ -203,6 +195,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonStatistics_KDS.TabIndex = 0;
             buttonStatistics_KDS.Text = "Статистика";
             buttonStatistics_KDS.UseVisualStyleBackColor = true;
+            buttonStatistics_KDS.Click += buttonStatistics_KDS_Click;
             // 
             // groupBoxSearchFilter_KDS
             // 
@@ -257,6 +250,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             comboBoxFilterField_KDS.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFilterField_KDS.FormattingEnabled = true;
+            comboBoxFilterField_KDS.Items.AddRange(new object[] { "Производитель", "Процессор", "Видекарта", "ОЗУ", "Жёсткий диск", "Дата выпуска" });
             comboBoxFilterField_KDS.Location = new Point(10, 43);
             comboBoxFilterField_KDS.Name = "comboBoxFilterField_KDS";
             comboBoxFilterField_KDS.Size = new Size(150, 23);
@@ -305,6 +299,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // dataGridViewPCs_KDS
             // 
             dataGridViewPCs_KDS.AllowUserToAddRows = false;
+            dataGridViewPCs_KDS.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewPCs_KDS.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewPCs_KDS.Dock = DockStyle.Fill;
             dataGridViewPCs_KDS.Location = new Point(3, 3);
@@ -371,14 +366,12 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
         private System.Windows.Forms.MenuStrip menuStripMain_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFile_KDS;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemNew_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSave_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSaveAs_KDS;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorFileMenu_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEdit_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAddPC_KDS;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEditPC_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeletePC_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemHelp_KDS;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemManual_KDS;
