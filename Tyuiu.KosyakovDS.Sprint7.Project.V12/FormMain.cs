@@ -380,5 +380,206 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
                 labelStatsResult_KDS.Text = $"Количество записей по [{columnName}] в строках [{rowsText}]: {result}";
             }
         }
+        private void buttonColumnChart_KDS_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPCs_KDS.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выделите строки в таблице!");
+                return;
+            }
+
+            int targetCol = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+            string colName = dataGridViewPCs_KDS.Columns[targetCol].HeaderText;
+
+            chartStats_KDS.Series[0].Points.Clear();
+            chartStats_KDS.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
+            chartStats_KDS.Series[0].Name = colName;
+
+            chartStats_KDS.Series[0]["PointWidth"] = "0.7";
+
+            chartStats_KDS.ChartAreas[0].AxisX.Interval = 1;
+            chartStats_KDS.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+
+            int xPos = 1;
+
+            var selectedRows = dataGridViewPCs_KDS.SelectedRows;
+
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                if (row.IsNewRow) continue;
+
+                string name;
+                if (row.Cells[0].Value != null)
+                {
+                    name = row.Cells[0].Value.ToString();
+                }
+                else
+                {
+                    name = "ПК";
+                }
+
+                double value = ds.GetValidDouble(row.Cells[targetCol].Value);
+
+                int pIdx = chartStats_KDS.Series[0].Points.AddXY(xPos, value);
+
+                chartStats_KDS.Series[0].Points[pIdx].AxisLabel = name;
+                chartStats_KDS.Series[0].Points[pIdx].Label = value.ToString();
+
+                xPos++;
+            }
+        }
+
+        private void buttonPieChart_KDS_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPCs_KDS.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выделите строки в таблице!");
+                return;
+            }
+
+            int targetCol = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+            string colName = dataGridViewPCs_KDS.Columns[targetCol].HeaderText;
+
+            chartStats_KDS.Series[0].Points.Clear();
+            chartStats_KDS.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+
+            foreach (DataGridViewRow row in dataGridViewPCs_KDS.SelectedRows)
+            {
+                if (row.IsNewRow) continue;
+
+                string name;
+                if (row.Cells[0].Value != null)
+                {
+                    name = row.Cells[0].Value.ToString();
+                }
+                else
+                {
+                    name = "ПК";
+                }
+
+                double value = ds.GetValidDouble(row.Cells[targetCol].Value);
+
+                if (value > 0)
+                {
+                    int pIdx = chartStats_KDS.Series[0].Points.AddXY(name, value);
+                    chartStats_KDS.Series[0].Points[pIdx].Label = "#VALY";
+                    chartStats_KDS.Series[0].Points[pIdx].LegendText = name;
+                }
+            }
+        }
+
+        private void buttonLineChart_KDS_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPCs_KDS.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выделите строки в таблице!");
+                return;
+            }
+
+            int targetCol = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+            string colName = dataGridViewPCs_KDS.Columns[targetCol].HeaderText;
+
+            chartStats_KDS.Series[0].Points.Clear();
+            chartStats_KDS.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chartStats_KDS.Series[0].MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            chartStats_KDS.Series[0].MarkerSize = 8;
+            chartStats_KDS.Series[0].BorderWidth = 3;
+            chartStats_KDS.Series[0].Name = colName;
+
+            chartStats_KDS.ChartAreas[0].AxisX.Interval = 1;
+            chartStats_KDS.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+
+            int xPos = 1;
+
+            foreach (DataGridViewRow row in dataGridViewPCs_KDS.SelectedRows)
+            {
+                if (row.IsNewRow) continue;
+
+                string name;
+                if (row.Cells[0].Value != null)
+                {
+                    name = row.Cells[0].Value.ToString();
+                }
+                else
+                {
+                    name = "ПК";
+                }
+
+                double value = ds.GetValidDouble(row.Cells[targetCol].Value);
+
+                int pIdx = chartStats_KDS.Series[0].Points.AddXY(xPos, value);
+
+                chartStats_KDS.Series[0].Points[pIdx].AxisLabel = name;
+                chartStats_KDS.Series[0].Points[pIdx].Label = value.ToString();
+
+                xPos++;
+            }
+        }
+
+        private void toolStripMenuItemDeletePC_KDS_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewPCs_KDS.SelectedRows.Count > 0)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить выбранные записи?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataGridViewPCs_KDS.SelectedRows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            dataGridViewPCs_KDS.Rows.Remove(row);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выделите строку для удаления.");
+            }
+        }
+
+        private void toolStripMenuItemAddPC_KDS_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.Rows.Add();
+
+            int lastRow = dataGridViewPCs_KDS.Rows.Count - 1;
+            dataGridViewPCs_KDS.CurrentCell = dataGridViewPCs_KDS.Rows[lastRow].Cells[0];
+
+            dataGridViewPCs_KDS.BeginEdit(true);
+        }
+
+        private void toolStripMenuItemDeleteManufacturer_KDS_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewSuppliers_KDS.SelectedRows.Count > 0)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить выбранные записи?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataGridViewSuppliers_KDS.SelectedRows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            dataGridViewSuppliers_KDS.Rows.Remove(row);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выделите строку для удаления.");
+            }
+        }
+
+        private void toolStripMenuItemAddManufacturer_KDS_Click(object sender, EventArgs e)
+        {
+            dataGridViewSuppliers_KDS.Rows.Add();
+
+            int lastRow = dataGridViewSuppliers_KDS.Rows.Count - 1;
+            dataGridViewSuppliers_KDS.CurrentCell = dataGridViewSuppliers_KDS.Rows[lastRow].Cells[0];
+
+            dataGridViewSuppliers_KDS.BeginEdit(true);
+        }
     }
 }

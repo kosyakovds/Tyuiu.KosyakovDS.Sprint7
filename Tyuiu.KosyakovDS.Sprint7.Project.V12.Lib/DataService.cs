@@ -23,6 +23,11 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
     public class DataService
     {
+        public double GetValidDouble(object cellValue)
+        {
+            return Convert.ToDouble(cellValue.ToString().Replace(".", ","));
+        }
+
         public int CalculateCount(List<PersonalComputer> pcs, string columnName)
         {
             int count = 0;
