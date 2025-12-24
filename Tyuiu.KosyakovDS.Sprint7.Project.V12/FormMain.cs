@@ -229,32 +229,155 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
                 int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
                 string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
 
-                double sum = 0;
+                List<PersonalComputer> selectedPCs = new List<PersonalComputer>();
                 string rowsText = "";
 
                 foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
                 {
                     if (cell.ColumnIndex == targetColIndex)
                     {
-                        if (cell.RowIndex != -1 && cell.RowIndex < pcList_KDS.Count)
+                        int rIdx = cell.RowIndex;
+                        if (rIdx != -1 && rIdx < pcList_KDS.Count)
                         {
-                            string valueToParse = "";
-
-                            if (columnName == "ОЗУ") valueToParse = pcList_KDS[cell.RowIndex].RAM;
-                            else if (columnName == "Жёсткий диск") valueToParse = pcList_KDS[cell.RowIndex].HDD;
-
-                            if (double.TryParse(valueToParse.Replace(".", ","), out double val))
-                            {
-                                sum += val;
-                            }
+                            selectedPCs.Add(pcList_KDS[rIdx]);
 
                             if (rowsText != "") rowsText += ", ";
-                            rowsText += (cell.RowIndex + 1).ToString();
+                            rowsText += (rIdx + 1).ToString();
                         }
                     }
                 }
 
-                labelStatsResult_KDS.Text = $"Итого: Сумма по столбцу [{columnName}] и строкам [{rowsText}]: {sum}";
+                double result = ds.CalculateSum(selectedPCs, columnName);
+
+                labelStatsResult_KDS.Text = $"Итого: Сумма по столбцу [{columnName}] и строкам [{rowsText}]: {result}";
+            }
+        }
+
+        private void buttonStatsAvg_KDS_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.EndEdit();
+
+            if (dataGridViewPCs_KDS.CurrentCell != null)
+            {
+                int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+                string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
+
+                List<PersonalComputer> selectedPCs = new List<PersonalComputer>();
+                string rowsText = "";
+
+                foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
+                {
+                    if (cell.ColumnIndex == targetColIndex)
+                    {
+                        int rIdx = cell.RowIndex;
+                        if (rIdx != -1 && rIdx < pcList_KDS.Count)
+                        {
+                            selectedPCs.Add(pcList_KDS[rIdx]);
+
+                            if (rowsText != "") rowsText += ", ";
+                            rowsText += (rIdx + 1).ToString();
+                        }
+                    }
+                }
+
+                double result = ds.CalculateAverage(selectedPCs, columnName);
+
+                labelStatsResult_KDS.Text = $"Среднее по [{columnName}] для строк [{rowsText}]: {Math.Round(result, 2)}";
+            }
+        }
+
+        private void buttonStatsMax_KDS_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.EndEdit();
+
+            if (dataGridViewPCs_KDS.CurrentCell != null)
+            {
+                int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+                string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
+
+                List<PersonalComputer> selectedPCs = new List<PersonalComputer>();
+                string rowsText = "";
+
+                foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
+                {
+                    if (cell.ColumnIndex == targetColIndex)
+                    {
+                        int rIdx = cell.RowIndex;
+                        if (rIdx != -1 && rIdx < pcList_KDS.Count)
+                        {
+                            selectedPCs.Add(pcList_KDS[rIdx]);
+                            if (rowsText != "") rowsText += ", ";
+                            rowsText += (rIdx + 1).ToString();
+                        }
+                    }
+                }
+
+                double result = ds.CalculateMax(selectedPCs, columnName);
+                labelStatsResult_KDS.Text = $"Максимум по [{columnName}] для строк [{rowsText}]: {result}";
+            }
+        }
+
+        private void buttonStatsMin_KDS_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.EndEdit();
+
+            if (dataGridViewPCs_KDS.CurrentCell != null)
+            {
+                int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+                string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
+
+                List<PersonalComputer> selectedPCs = new List<PersonalComputer>();
+                string rowsText = "";
+
+                foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
+                {
+                    if (cell.ColumnIndex == targetColIndex)
+                    {
+                        int rIdx = cell.RowIndex;
+                        if (rIdx != -1 && rIdx < pcList_KDS.Count)
+                        {
+                            selectedPCs.Add(pcList_KDS[rIdx]);
+                            if (rowsText != "") rowsText += ", ";
+                            rowsText += (rIdx + 1).ToString();
+                        }
+                    }
+                }
+
+                double result = ds.CalculateMin(selectedPCs, columnName);
+                labelStatsResult_KDS.Text = $"Минимум по [{columnName}] для строк [{rowsText}]: {result}";
+            }
+        }
+
+        private void buttonStatsCount_Click(object sender, EventArgs e)
+        {
+            dataGridViewPCs_KDS.EndEdit();
+
+            if (dataGridViewPCs_KDS.CurrentCell != null)
+            {
+                int targetColIndex = dataGridViewPCs_KDS.CurrentCell.ColumnIndex;
+                string columnName = dataGridViewPCs_KDS.Columns[targetColIndex].HeaderText;
+
+                List<PersonalComputer> selectedPCs = new List<PersonalComputer>();
+                string rowsText = "";
+
+                foreach (DataGridViewCell cell in dataGridViewPCs_KDS.SelectedCells)
+                {
+                    if (cell.ColumnIndex == targetColIndex)
+                    {
+                        int rIdx = cell.RowIndex;
+                        if (rIdx != -1 && rIdx < pcList_KDS.Count)
+                        {
+                            selectedPCs.Add(pcList_KDS[rIdx]);
+
+                            if (rowsText != "") rowsText += ", ";
+                            rowsText += (rIdx + 1).ToString();
+                        }
+                    }
+                }
+
+                int result = ds.CalculateCount(selectedPCs, columnName);
+
+                labelStatsResult_KDS.Text = $"Количество записей по [{columnName}] в строках [{rowsText}]: {result}";
             }
         }
     }

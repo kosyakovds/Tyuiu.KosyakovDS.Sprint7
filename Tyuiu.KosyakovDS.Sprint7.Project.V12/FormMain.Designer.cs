@@ -47,6 +47,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             toolStripMenuItemManual_KDS = new ToolStripMenuItem();
             toolStripMenuItemAbout_KDS = new ToolStripMenuItem();
             panelTop_KDS = new Panel();
+            labelStatsResult_KDS = new Label();
             buttonChart_KDS = new Button();
             groupBoxStats_KDS = new GroupBox();
             buttonStatsSum = new Button();
@@ -67,7 +68,6 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewPCs_KDS = new DataGridView();
             tabPageSuppliers_KDS = new TabPage();
             dataGridViewSuppliers_KDS = new DataGridView();
-            labelStatsResult_KDS = new Label();
             menuStripMain_KDS.SuspendLayout();
             panelTop_KDS.SuspendLayout();
             groupBoxStats_KDS.SuspendLayout();
@@ -173,6 +173,16 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             panelTop_KDS.Size = new Size(984, 130);
             panelTop_KDS.TabIndex = 1;
             // 
+            // labelStatsResult_KDS
+            // 
+            labelStatsResult_KDS.AutoSize = true;
+            labelStatsResult_KDS.Location = new Point(524, 103);
+            labelStatsResult_KDS.Name = "labelStatsResult_KDS";
+            labelStatsResult_KDS.RightToLeft = RightToLeft.No;
+            labelStatsResult_KDS.Size = new Size(43, 15);
+            labelStatsResult_KDS.TabIndex = 2;
+            labelStatsResult_KDS.Text = "Итого:";
+            // 
             // buttonChart_KDS
             // 
             buttonChart_KDS.Location = new Point(872, 15);
@@ -215,6 +225,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonStatsCount.TabIndex = 0;
             buttonStatsCount.Text = "Количество";
             buttonStatsCount.UseVisualStyleBackColor = true;
+            buttonStatsCount.Click += buttonStatsCount_Click;
             // 
             // buttonStatsAvg_KDS
             // 
@@ -224,6 +235,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonStatsAvg_KDS.TabIndex = 0;
             buttonStatsAvg_KDS.Text = "Среднее";
             buttonStatsAvg_KDS.UseVisualStyleBackColor = true;
+            buttonStatsAvg_KDS.Click += buttonStatsAvg_KDS_Click;
             // 
             // buttonStatsMin_KDS
             // 
@@ -233,6 +245,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonStatsMin_KDS.TabIndex = 0;
             buttonStatsMin_KDS.Text = "Мин";
             buttonStatsMin_KDS.UseVisualStyleBackColor = true;
+            buttonStatsMin_KDS.Click += buttonStatsMin_KDS_Click;
             // 
             // buttonStatsMax_KDS
             // 
@@ -242,6 +255,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonStatsMax_KDS.TabIndex = 0;
             buttonStatsMax_KDS.Text = "Макс";
             buttonStatsMax_KDS.UseVisualStyleBackColor = true;
+            buttonStatsMax_KDS.Click += buttonStatsMax_KDS_Click;
             // 
             // groupBoxSearchFilter_KDS
             // 
@@ -379,16 +393,6 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewSuppliers_KDS.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewSuppliers_KDS.Size = new Size(970, 473);
             dataGridViewSuppliers_KDS.TabIndex = 0;
-            // 
-            // labelStatsResult_KDS
-            // 
-            labelStatsResult_KDS.AutoSize = true;
-            labelStatsResult_KDS.Location = new Point(524, 103);
-            labelStatsResult_KDS.Name = "labelStatsResult_KDS";
-            labelStatsResult_KDS.RightToLeft = RightToLeft.No;
-            labelStatsResult_KDS.Size = new Size(43, 15);
-            labelStatsResult_KDS.TabIndex = 2;
-            labelStatsResult_KDS.Text = "Итого:";
             // 
             // FormMain
             // 
