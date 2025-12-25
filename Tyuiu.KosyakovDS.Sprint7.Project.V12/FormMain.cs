@@ -193,33 +193,6 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             File.WriteAllText(fileName, sb.ToString(), Encoding.GetEncoding(1251));
         }
 
-        private void buttonStatistics_KDS_Click(object sender, EventArgs e)
-        {
-            List<PersonalComputer> pcs = new List<PersonalComputer>();
-            List<Supplier> suppliers = new List<Supplier>();
-
-            foreach (DataGridViewRow row in dataGridViewPCs_KDS.Rows)
-            {
-                if (!row.IsNewRow && row.Cells[0].Value != null)
-                {
-                    pcs.Add(new PersonalComputer { Manufacturer = row.Cells[0].Value.ToString() });
-                }
-            }
-
-            foreach (DataGridViewRow row in dataGridViewSuppliers_KDS.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    suppliers.Add(new Supplier());
-                }
-            }
-
-            string stats = ds.GetStatistics(pcs, suppliers);
-
-            FormStats formStats = new FormStats(stats);
-            formStats.ShowDialog();
-        }
-
         private void buttonStatsSum_Click(object sender, EventArgs e)
         {
             dataGridViewPCs_KDS.EndEdit();
@@ -580,6 +553,70 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             dataGridViewSuppliers_KDS.CurrentCell = dataGridViewSuppliers_KDS.Rows[lastRow].Cells[0];
 
             dataGridViewSuppliers_KDS.BeginEdit(true);
+        }
+
+        private void buttonApplyFilter_KDS_Click(object sender, EventArgs e)
+        {
+            string searchText = textBoxSearchValue_KDS.Text.ToLower().Trim();
+            string selectedColumnName = comboBoxFilterField_KDS.SelectedItem?.ToString();
+
+            dataGridViewPCs_KDS.CurrentCell = null;
+
+            foreach (DataGridViewRow row in dataGridViewPCs_KDS.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                bool isVisible = false;
+
+                if (selectedColumnName == "ֲסו סעמכבצû" || string.IsNullOrEmpty(selectedColumnName))
+                {
+                    for (int j = 0; j < row.Cells.Count; j++)
+                    {
+                        if (row.Cells[j].Value != null &&
+                            row.Cells[j].Value.ToString().ToLower().Contains(searchText))
+                        {
+                            isVisible = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    int targetColIndex = -1;
+                    for (int i = 0; i < dataGridViewPCs_KDS.Columns.Count; i++)
+                    {
+                        if (dataGridViewPCs_KDS.Columns[i].HeaderText == selectedColumnName)
+                        {
+                            targetColIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (targetColIndex != -1)
+                    {
+                        string cellValue = row.Cells[targetColIndex].Value?.ToString().ToLower() ?? "";
+                        if (cellValue.Contains(searchText))
+                        {
+                            isVisible = true;
+                        }
+                    }
+                }
+
+                row.Visible = isVisible;
+            }
+        }
+
+        private void buttonClearFilter_KDS_Click(object sender, EventArgs e)
+        {
+            
+            textBoxSearchValue_KDS.Clear();
+            comboBoxFilterField_KDS.SelectedIndex = 0;
+            dataGridViewPCs_KDS.CurrentCell = null;
+
+            foreach (DataGridViewRow row in dataGridViewPCs_KDS.Rows)
+            {
+                row.Visible = true;
+            }
         }
     }
 }

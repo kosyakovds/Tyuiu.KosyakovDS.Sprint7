@@ -34,9 +34,9 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             menuStripMain_KDS = new MenuStrip();
             toolStripMenuItemFile_KDS = new ToolStripMenuItem();
             toolStripMenuItemOpen_KDS = new ToolStripMenuItem();
@@ -115,28 +115,28 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // toolStripMenuItemOpen_KDS
             // 
             toolStripMenuItemOpen_KDS.Name = "toolStripMenuItemOpen_KDS";
-            toolStripMenuItemOpen_KDS.Size = new Size(180, 22);
+            toolStripMenuItemOpen_KDS.Size = new Size(163, 22);
             toolStripMenuItemOpen_KDS.Text = "Открыть";
             toolStripMenuItemOpen_KDS.Click += ToolStripMenuItemOpen_KDS_Click;
             // 
             // toolStripMenuItemSave_KDS
             // 
             toolStripMenuItemSave_KDS.Name = "toolStripMenuItemSave_KDS";
-            toolStripMenuItemSave_KDS.Size = new Size(180, 22);
+            toolStripMenuItemSave_KDS.Size = new Size(163, 22);
             toolStripMenuItemSave_KDS.Text = "Сохранить";
             toolStripMenuItemSave_KDS.Click += ToolStripMenuItemSave_KDS_Click;
             // 
             // toolStripMenuItemSaveAs_KDS
             // 
             toolStripMenuItemSaveAs_KDS.Name = "toolStripMenuItemSaveAs_KDS";
-            toolStripMenuItemSaveAs_KDS.Size = new Size(180, 22);
+            toolStripMenuItemSaveAs_KDS.Size = new Size(163, 22);
             toolStripMenuItemSaveAs_KDS.Text = "Сохранить как...";
             toolStripMenuItemSaveAs_KDS.Click += ToolStripMenuItemSaveAs_KDS_Click;
             // 
             // toolStripSeparatorFileMenu_KDS
             // 
             toolStripSeparatorFileMenu_KDS.Name = "toolStripSeparatorFileMenu_KDS";
-            toolStripSeparatorFileMenu_KDS.Size = new Size(177, 6);
+            toolStripSeparatorFileMenu_KDS.Size = new Size(160, 6);
             // 
             // toolStripMenuItemEdit_KDS
             // 
@@ -149,20 +149,20 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             toolStripMenuItemAdd_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemAddPC_KDS, toolStripMenuItemAddManufacturer_KDS });
             toolStripMenuItemAdd_KDS.Name = "toolStripMenuItemAdd_KDS";
-            toolStripMenuItemAdd_KDS.Size = new Size(180, 22);
+            toolStripMenuItemAdd_KDS.Size = new Size(126, 22);
             toolStripMenuItemAdd_KDS.Text = "Добавить";
             // 
             // toolStripMenuItemAddPC_KDS
             // 
             toolStripMenuItemAddPC_KDS.Name = "toolStripMenuItemAddPC_KDS";
-            toolStripMenuItemAddPC_KDS.Size = new Size(180, 22);
+            toolStripMenuItemAddPC_KDS.Size = new Size(143, 22);
             toolStripMenuItemAddPC_KDS.Text = "Компьютер";
             toolStripMenuItemAddPC_KDS.Click += toolStripMenuItemAddPC_KDS_Click;
             // 
             // toolStripMenuItemAddManufacturer_KDS
             // 
             toolStripMenuItemAddManufacturer_KDS.Name = "toolStripMenuItemAddManufacturer_KDS";
-            toolStripMenuItemAddManufacturer_KDS.Size = new Size(180, 22);
+            toolStripMenuItemAddManufacturer_KDS.Size = new Size(143, 22);
             toolStripMenuItemAddManufacturer_KDS.Text = "Поставщика";
             toolStripMenuItemAddManufacturer_KDS.Click += toolStripMenuItemAddManufacturer_KDS_Click;
             // 
@@ -170,7 +170,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             toolStripMenuItemDelete_KDS.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItemDeletePC_KDS, toolStripMenuItemDeleteManufacturer_KDS });
             toolStripMenuItemDelete_KDS.Name = "toolStripMenuItemDelete_KDS";
-            toolStripMenuItemDelete_KDS.Size = new Size(180, 22);
+            toolStripMenuItemDelete_KDS.Size = new Size(126, 22);
             toolStripMenuItemDelete_KDS.Text = "Удалить";
             // 
             // toolStripMenuItemDeletePC_KDS
@@ -197,13 +197,13 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // toolStripMenuItemManual_KDS
             // 
             toolStripMenuItemManual_KDS.Name = "toolStripMenuItemManual_KDS";
-            toolStripMenuItemManual_KDS.Size = new Size(180, 22);
+            toolStripMenuItemManual_KDS.Size = new Size(149, 22);
             toolStripMenuItemManual_KDS.Text = "Руководство";
             // 
             // toolStripMenuItemAbout_KDS
             // 
             toolStripMenuItemAbout_KDS.Name = "toolStripMenuItemAbout_KDS";
-            toolStripMenuItemAbout_KDS.Size = new Size(180, 22);
+            toolStripMenuItemAbout_KDS.Size = new Size(149, 22);
             toolStripMenuItemAbout_KDS.Text = "О программе";
             toolStripMenuItemAbout_KDS.Click += toolStripMenuItemAbout_KDS_Click;
             // 
@@ -316,6 +316,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonClearFilter_KDS.TabIndex = 5;
             buttonClearFilter_KDS.Text = "Очистить";
             buttonClearFilter_KDS.UseVisualStyleBackColor = true;
+            buttonClearFilter_KDS.Click += buttonClearFilter_KDS_Click;
             // 
             // buttonApplyFilter_KDS
             // 
@@ -325,6 +326,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             buttonApplyFilter_KDS.TabIndex = 4;
             buttonApplyFilter_KDS.Text = "Применить";
             buttonApplyFilter_KDS.UseVisualStyleBackColor = true;
+            buttonApplyFilter_KDS.Click += buttonApplyFilter_KDS_Click;
             // 
             // textBoxSearchValue_KDS
             // 
@@ -346,7 +348,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             comboBoxFilterField_KDS.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFilterField_KDS.FormattingEnabled = true;
-            comboBoxFilterField_KDS.Items.AddRange(new object[] { "Производитель", "Процессор", "Видекарта", "ОЗУ", "Жёсткий диск", "Дата выпуска" });
+            comboBoxFilterField_KDS.Items.AddRange(new object[] { "Все столбцы", "Производитель", "Процессор", "Видеокарта", "ОЗУ", "Жёсткий диск", "Дата выпуска" });
             comboBoxFilterField_KDS.Location = new Point(10, 43);
             comboBoxFilterField_KDS.Name = "comboBoxFilterField_KDS";
             comboBoxFilterField_KDS.Size = new Size(150, 23);
@@ -461,18 +463,18 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             // 
             // chartStats_KDS
             // 
-            chartArea2.Name = "ChartArea1";
-            chartStats_KDS.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartStats_KDS.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            chartStats_KDS.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartStats_KDS.Legends.Add(legend1);
             chartStats_KDS.Location = new Point(12, 157);
             chartStats_KDS.Name = "chartStats_KDS";
             chartStats_KDS.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartStats_KDS.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartStats_KDS.Series.Add(series1);
             chartStats_KDS.Size = new Size(456, 473);
             chartStats_KDS.TabIndex = 2;
             // 
