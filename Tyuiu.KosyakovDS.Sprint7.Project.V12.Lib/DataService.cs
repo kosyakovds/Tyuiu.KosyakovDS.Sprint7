@@ -178,25 +178,5 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
             return count > 0 ? sum / count : 0;
         }
-
-        public string GetStatistics(List<PersonalComputer> pcs, List<Supplier> suppliers)
-        {
-            string stats = Environment.NewLine;
-
-            List<string> manufacturers = new List<string>();
-            foreach (PersonalComputer pc in pcs)
-            {
-                if (!manufacturers.Contains(pc.Manufacturer))
-                {
-                    manufacturers.Add(pc.Manufacturer);
-                }
-            }
-
-            stats += "Всего ПК: " + pcs.Count + Environment.NewLine + Environment.NewLine;
-            stats += "Всего поставщиков: " + suppliers.Count + Environment.NewLine + Environment.NewLine;
-            stats += "Количество производителей: " + manufacturers.Count;
-
-            return stats;
-        }
     }
 }
