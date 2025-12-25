@@ -255,7 +255,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
                 double result = ds.CalculateAverage(selectedPCs, columnName);
 
-                labelStatsResult_KDS.Text = $"Среднее по [{columnName}] для строк [{rowsText}]: {Math.Round(result, 2)}";
+                labelStatsResult_KDS.Text = $"Итого: Среднее по [{columnName}] для строк [{rowsText}]: {Math.Round(result, 2)}";
             }
         }
 
@@ -286,7 +286,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
                 }
 
                 double result = ds.CalculateMax(selectedPCs, columnName);
-                labelStatsResult_KDS.Text = $"Максимум по [{columnName}] для строк [{rowsText}]: {result}";
+                labelStatsResult_KDS.Text = $"Итого: Максимум по [{columnName}] для строк [{rowsText}]: {result}";
             }
         }
 
@@ -317,7 +317,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
                 }
 
                 double result = ds.CalculateMin(selectedPCs, columnName);
-                labelStatsResult_KDS.Text = $"Минимум по [{columnName}] для строк [{rowsText}]: {result}";
+                labelStatsResult_KDS.Text = $"Итого: Минимум по [{columnName}] для строк [{rowsText}]: {result}";
             }
         }
 
@@ -350,7 +350,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
                 int result = ds.CalculateCount(selectedPCs, columnName);
 
-                labelStatsResult_KDS.Text = $"Количество записей по [{columnName}] в строках [{rowsText}]: {result}";
+                labelStatsResult_KDS.Text = $"Итого: Количество записей по [{columnName}] в строках [{rowsText}]: {result}";
             }
         }
         private void buttonColumnChart_KDS_Click(object sender, EventArgs e)
@@ -608,7 +608,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
 
         private void buttonClearFilter_KDS_Click(object sender, EventArgs e)
         {
-            
+
             textBoxSearchValue_KDS.Clear();
             comboBoxFilterField_KDS.SelectedIndex = 0;
             dataGridViewPCs_KDS.CurrentCell = null;
@@ -617,6 +617,19 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
             {
                 row.Visible = true;
             }
+        }
+
+        private void toolStripMenuItemManual_KDS_Click(object sender, EventArgs e)
+        {
+            string manualText = "РУКОВОДСТВО ПОЛЬЗОВАТЕЛЯ\n\n" +
+        "1. ФАЙЛ: Используйте для открытия и сохранения CSV-таблиц.\n" +
+        "2. РЕДАКТИРОВАТЬ: Добавление и удаление записей о ПК и поставщиках.\n" +
+        "3. ПОИСК: Выберите поле, введите значение и нажмите иконку 'Поиск'.\n" +
+        "4. СТАТИСТИКА: Выделите ячейки в таблице и нажмите нужную кнопку (Сумма, Мин/Макс и др.).\n" +
+        "5. ГРАФИКИ: Переключайтесь между видами диаграмм на правой панели для анализа.\n\n" +
+        "Подсказка: наведите на любую иконку для получения краткой справки.";
+
+            MessageBox.Show(manualText, "Руководство пользователя", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

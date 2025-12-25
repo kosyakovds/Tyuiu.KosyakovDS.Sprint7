@@ -6,7 +6,7 @@ namespace Tyuiu.KosyakovDS.Sprint7.Project.V12
     public class PersonalComputer
     {
         public string Manufacturer { get; set; } = "";
-        public string Processor { get; set; } = "";
+        public string Processor { get; set; } = ""; 
         public string Frequency { get; set; } = "";
         public string RAM { get; set; } = "";
         public string HDD { get; set; } = "";
